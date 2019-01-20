@@ -1,0 +1,10 @@
+#simple-task table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#simple-task button{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
