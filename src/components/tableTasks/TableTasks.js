@@ -71,7 +71,7 @@ class TableTasks extends Component
             if(this.state.data[i].is_high_priority)
                 cell.push(<td
                             onClick={this.onClick.bind(this, i)}
-                            style={{fontWeight: 'bold', cursor: 'pointer'}}
+                            style={{fontWeight: 'bold'}}
                             className="name"
                             key={this.state.data[i].name}
                             id={this.state.data[i].name}>
@@ -80,7 +80,6 @@ class TableTasks extends Component
             else
                 cell.push(<td
                             onClick={this.onClick.bind(this, i)}
-                            style={{cursor: 'pointer'}}
                             className="name"
                             key={this.state.data[i].name}
                             id={this.state.data[i].name}>
@@ -143,7 +142,7 @@ class TableTasks extends Component
                         </tr>
                         </thead>
                         <tbody>
-                        {rows}
+                            {rows}
                         </tbody>
                     </table>
                 </div>

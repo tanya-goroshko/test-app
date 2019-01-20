@@ -1,4 +1,16 @@
-#simple-board table{
-    margin-left: auto;
-    margin-right: auto;
+table{
+    margin: auto;
+    border: 1px solid rgba(0,0,0,0.12);
+    width: 800px;
+}
+
+td, th{
+    padding: 5px;
+}
+
+td.name{
+    width: 150px;
+    cursor: pointer;
+    max-width: 400px;
+    overflow: hidden;
 }

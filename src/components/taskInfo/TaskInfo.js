@@ -64,9 +64,9 @@ class TaskInfo extends Component
                                     {prop}
                               </td>);
                     item.push(<td
-                                  style={{cursor: 'pointer'}}
                                   key={this.props.data[prop]}>
                                     <input
+                                        className="edit-name"
                                         type="text"
                                         onBlur={this.onBlur.bind(this)}
                                         defaultValue={this.props.data[prop]}
@@ -78,6 +78,7 @@ class TaskInfo extends Component
                                     {prop}
                               </td>);
                     item.push(<td
+                                className='task-name'
                                 key={this.props.data[prop]}
                                 onClick={this.onClick.bind(this)}
                                 style={{cursor: 'pointer'}}>
@@ -85,7 +86,8 @@ class TaskInfo extends Component
                               </td>)
                 }
             }
-            else if(prop === 'description' ||
+            else
+                if(prop === 'description' ||
                     prop === 'creation_date' ||
                     prop === 'physical_progress' ||
                     prop === 'project_id' ||
@@ -110,7 +112,7 @@ class TaskInfo extends Component
                         {res}
                     </tbody>
                 </table>
-            <button onClick={this.handleClick.bind(this)}>Back</button>
+            <button className="btn" onClick={this.handleClick.bind(this)}>Back</button>
             </div>
         )
     }
