@@ -135,7 +135,7 @@ class TableTasks extends Component
         <div>
             {!this.state.showTask ?
                 <div id="simple-board">
-                    <table>
+                    <table className="striped">
                         <thead>
                         <tr>
                             {thead_cell}

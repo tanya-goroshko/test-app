@@ -107,7 +107,7 @@ class TaskInfo extends Component
 
         return(
             <div id="simple-task">
-                <table>
+                <table className="striped">
                     <tbody>
                         {res}
                     </tbody>
