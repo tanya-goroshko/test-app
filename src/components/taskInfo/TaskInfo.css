@@ -25,5 +25,5 @@ button{
 .task-name{
     width: 400px;
     max-width: 400px;
-    overflow: hidden;
+    overflow: scroll;
 }

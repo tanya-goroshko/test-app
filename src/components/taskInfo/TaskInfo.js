@@ -86,20 +86,15 @@ class TaskInfo extends Component
                               </td>)
                 }
             }
-            else
-                if(prop === 'description' ||
-                    prop === 'creation_date' ||
-                    prop === 'physical_progress' ||
-                    prop === 'project_id' ||
-                    prop === 'start_date' ||
-                    prop === 'id'){
+            else if(prop !== 'name')
+            {
                 item.push(<td key={prop}>{prop}</td>);
                 item.push(<td key={this.props.data[prop]}>{this.props.data[prop]}</td>);
             }
             else
                 continue;
 
-            row.push(<tr key={prop}>{item}</tr>);
+            row.push(<tr className="tableRow" key={prop}>{item}</tr>);
 
         }
 

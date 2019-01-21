@@ -2,8 +2,11 @@ import ReactDOM from "react-dom";
 import TaskInfo from "./TaskInfo";
 import React from "react";
 import {mount} from 'enzyme';
-import {jest, expect} from 'jest';
 import data from '../../task.json';
+import Enzyme from "enzyme/build";
+import Adapter from "enzyme-adapter-react-16/build";
+
+Enzyme.configure({adapter: new Adapter()});
 
 it('renders without crashing TaskInfo component', () => {
     const div = document.createElement('div');
@@ -14,50 +17,73 @@ it('renders without crashing TaskInfo component', () => {
     }
 });
 
-it('calls onClick event when clicked name of task', () => {
+describe('taskInfo container testing', () => {
 
-    const onClick = jest.fn();
-    let res = [], item, row = [];
+    const props = {
+        editingMode: false,
+        name: data[0].name,
+        changeName: () => {}
+    };
+    describe('check if table cells render correctly', () => {
 
-    for(let iter = 0; iter < data; iter++){
-        for (let prop in data[iter])
+        for (let i = 0; i < data.length; i++)
         {
-            item = [];
-            if (prop === 'name')
-            {
-                item.push(<td
-                            key={prop}>
-                            {prop}
-                        </td>);
-                item.push(<td
-                                className={prop}
-                                onClick={onClick}
-                                style={{cursor: 'pointer'}}
-                                key={data[iter][prop]}>
-                            <input
-                                type="text"
-                                onBlur={this.onBlur.bind(this)}
-                                defaultValue={data[iter][prop]}
-                                autoFocus/>
-                            </td>)
+            const taskInfo = mount(<TaskInfo data={data[i]} {...props}/>);
+            const rows = taskInfo.find('tbody .tableRow');
+            expect(rows.length).toEqual(Object.keys(data[i]).length);
+            const cells = taskInfo.find('tbody .tableRow td');
+            expect(cells.length).toEqual(Object.keys(data[i]).length * 2);
+        }
+    });
 
-            }
-            else
-                continue;
+    describe('check rendering button BACK', () => {
 
-            row.push(<tr key={prop}>{item}</tr>);
+        for(let i = 0; i < data.length; i++)
+        {
+            const taskInfo = mount(<TaskInfo data={data[i]} {...props}/>);
+            expect(taskInfo.find('button').type()).toEqual('button');
+            // taskInfo.find('button').at(0).simulate('click');
+        }
+    });
 
+    describe('check if appears td when editing mode is disabled', () => {
+
+        for(let i = 0; i < data.length; i++)
+        {
+            const taskInfo = mount(<TaskInfo data={data[i]} {...props}/>);
+            expect(taskInfo.find('td.task-name').type()).toEqual('td');
         }
 
-        res.push(row);
-        let wrapper = mount(
-            <table>
-                <tbody>
-                    {res}
-                </tbody>
-            </table>);
-        wrapper.find('td.name').first().simulate('click');
-        wrapper.update();
-        expect(onClick).toBeCalled();
-    }
+    });
+
+    describe('check if editing mode is changing on click event', () => {
+
+        for(let i = 0; i < data.length; i++)
+        {
+            const taskInfo = mount(<TaskInfo data={data[i]} {...props}/>);
+            taskInfo.find('td.task-name').at(0).simulate('click');
+            expect(taskInfo.state().editingMode).toEqual(true);
+        }
+    });
+
+    describe('check if input field appears on changing editing mode', () => {
+
+        for(let i = 0; i < data.length; i++)
+        {
+            const taskInfo = mount(<TaskInfo data={data[i]} {...props}/>);
+            taskInfo.setState({editingMode: true});
+            expect(taskInfo.find('td input').type()).toEqual('input');
+        }
+    });
+
+    describe('check onBlur event input field', () => {
+
+        for(let i = 0; i < data.length; i++)
+        {
+            const taskInfo = mount(<TaskInfo data={data[i]} {...props}/>);
+            taskInfo.setState({editingMode: true});
+            taskInfo.find('td input').at(0).simulate('blur');
+            expect(taskInfo.find('td.task-name').type()).toEqual('td');
+        }
+    });
 });
