@@ -6,9 +6,9 @@ import dateFormat from 'dateformat';
 
 class TableTasks extends Component
 {
-  constructor()
+  constructor(props)
   {
-      super();
+      super(props);
       this.dateFormat();
       this.state =
           {
@@ -57,11 +57,11 @@ class TableTasks extends Component
   render()
   {
     let thead_cell = [];
-        thead_cell.push(<th className="name" key="name">Task name</th>);
-        thead_cell.push(<th className="tag" key="tag">Tags</th>);
-        thead_cell.push(<th className="actual_effort" key="actual_effort">Actual effort</th>);
-        thead_cell.push(<th className="estimated_effort" key="estimated_effort">Estimated effort</th>);
-        thead_cell.push(<th className="due_date" key="due_date">Due date</th>);
+        thead_cell.push(<th key="name">Task name</th>);
+        thead_cell.push(<th key="tag">Tags</th>);
+        thead_cell.push(<th key="actual_effort">Actual effort</th>);
+        thead_cell.push(<th key="estimated_effort">Estimated effort</th>);
+        thead_cell.push(<th key="due_date">Due date</th>);
     let rows = [];
     for (let i = 0; i < this.state.data.length; i++)
     {
@@ -71,8 +71,7 @@ class TableTasks extends Component
             if(this.state.data[i].is_high_priority)
                 cell.push(<td
                             onClick={this.onClick.bind(this, i)}
-                            style={{fontWeight: 'bold'}}
-                            className="name"
+                            className="name high-priority"
                             key={this.state.data[i].name}
                             id={this.state.data[i].name}>
                                 {this.state.data[i].name}

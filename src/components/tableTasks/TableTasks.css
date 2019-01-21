@@ -4,6 +4,10 @@ table{
     width: 800px;
 }
 
+table thead{
+    background-color: #26a69a54;
+}
+
 td, th{
     padding: 5px;
 }
@@ -12,5 +16,10 @@ td.name{
     width: 150px;
     cursor: pointer;
     max-width: 400px;
-    overflow: hidden;
+    overflow: scroll;
+}
+
+.high-priority{
+    font-weight: bold;
+    color: #26a69a;
 }
