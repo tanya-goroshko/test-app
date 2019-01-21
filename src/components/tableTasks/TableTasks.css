@@ -15,7 +15,7 @@ td, th{
 td.name{
     width: 150px;
     cursor: pointer;
-    max-width: 400px;
+    max-width: 170px;
     overflow: scroll;
 }
 
