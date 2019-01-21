@@ -23,7 +23,7 @@ button{
 }
 
 .task-name{
-    width: 400px;
+    /*width: 400px;*/
     max-width: 400px;
     overflow: scroll;
 }
